@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title> Tractocamión Express - Galería de Productos</title>
+  <style>
+    :root {
+      --bg-dark: #707070;
+      --card-dark: #1f1f1f;
+      --primary: #ff9204;
+      --accent: #1c2d79;
+      --text-light: #e0e0e0;
+      --text-muted: #9e9e9e;
+      --border: #333;
+      --space-sm: 0.75rem;
+      --space-md: 1.5rem;
+      --space-lg: 2rem;
+      --radius: 12px;
+      --font-sm: 0.9rem;
+      --font-base: 1rem;
+      --font-lg: 1.2rem;
+      --font-xl: 1.5rem;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: auto;
+      padding: var(--space-md);
+    }
+
+    .header {
+      background-color: #353030;
+      padding: var(--space-md) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: var(--font-xl);
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .breadcrumb {
+      font-size: var(--font-sm);
+      color: var(--text-muted);
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: var(--font-xl);
+      margin: var(--space-lg) 0;
+      color: var(--accent);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-lg);
+    }
+
+    .product-card {
+      background: var(--card-dark);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+    }
+
+    .product-image-container {
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.05);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: var(--space-sm);
+      right: var(--space-sm);
+      background: var(--accent);
+      color: white;
+      padding: 0.3rem 0.6rem;
+      border-radius: 999px;
+      font-size: var(--font-sm);
+    }
+
+    .product-content {
+      padding: var(--space-md);
+    }
+
+    .product-title {
+      font-size: var(--font-lg);
+      margin-bottom: 0.5rem;
+    }
+
+    .product-description {
+      font-size: var(--font-sm);
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .product-price {
+      font-size: var(--font-lg);
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .product-price .original {
+      text-decoration: line-through;
+      color: #888;
+      margin-right: 0.5rem;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: bold;
+      font-size: var(--font-sm);
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #000;
+    }
+
+    .btn-primary:hover {
+      background: #8b4503;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary);
+      color: #000;
+    }
+
+    @media (max-width: 768px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .smartwatch-img {
+      background-image: url('https://images.unsplash.com/photo-1603297631959-6b78c6e62c6c?fit=crop&w=800&h=600');
+      background-size: cover;
+      background-position: center;
+      aspect-ratio: 1 / 1;
+    }
+
+    @media (max-width: 768px) {
+      .smartwatch-img {
+        background-position: top;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-content">
+      <div class="logo">Tractocamión Express</div>
+      <div class="breadcrumb">Inicio > Productos > Electrónicos</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2 class="section-title">Tractocamiones en Venta</h2>
+    <div class="products-grid">
+
+      <article class="product-card">
+        <div class="product-image-container">
+          <picture>
+            <source media="(max-width: 767px)" srcset="https://carga.com.co/wp-content/uploads/2021/01/thumbnail-1-thegem-blog-default.jpg">
+            <source media="(min-width: 768px)" srcset="https://carga.com.co/wp-content/uploads/2021/01/thumbnail-1-thegem-blog-default.jpg">
+            <img class="product-image" src="https://carga.com.co/wp-content/uploads/2021/01/thumbnail-1-thegem-blog-default.jpg" alt="Carro deportivo rojo" loading="lazy">
+          </picture>
+          <span class="product-badge">Nuevo</span>
+        </div>
+        <div class="product-content">
+                    <h3 class="product-title"> Kenworth T800 </h3>
+                    <p class="product-description"> Se trata de un tractocamión Kenworth T800, conocido por su robustez y capacidad para trabajos pesados y largas jornadas. </p>
+                    <div class="product-price"><span class="original">$560.000.000</span>$510.000.000</div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary">Agregar al Carrito</button>
+                        <button class="btn btn-secondary">Ver Detalles</button>
+                    </div>
+        </div>
+      </article>
+
+<article class="product-card">
+  <div class="product-image-container">
+    <img class="product-image" 
+      src="https://previews.123rf.com/images/deusexlupus/deusexlupus1711/deusexlupus171100401/91113640-blue-18-wheeler-truck-no-trailer.jpg" 
+      srcset="https://previews.123rf.com/images/deusexlupus/deusexlupus1711/deusexlupus171100401/91113640-blue-18-wheeler-truck-no-trailer.jpg 400w,
+              https://previews.123rf.com/images/deusexlupus/deusexlupus1711/deusexlupus171100401/91113640-blue-18-wheeler-truck-no-trailer.jpg 800w,
+              https://previews.123rf.com/images/deusexlupus/deusexlupus1711/deusexlupus171100401/91113640-blue-18-wheeler-truck-no-trailer.jpg 1200w"
+      sizes="(max-width: 768px) 100vw, (min-width: 769px) and (max-width: 1200px) 50vw, 33vw"
+      alt="Carro familiar azul" loading="lazy">
+    <span class="product-badge">Oferta</span>
+  </div>
+  <div class="product-content">
+                    <h3 class="product-title"> Chevrolet Frr </h3>
+                    <p class="product-description"> Este tipo de camiones se utiliza principalmente para el transporte de mercancías a larga distancia, acoplando un semirremolque que carece de eje delantero y se apoya en la cabeza tractora para su movimiento. </p>
+                    <div class="product-price"><span class="original"> $239.400.000 </span> $200.100.000 </div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary">Agregar al Carrito</button>
+                        <button class="btn btn-secondary">Ver Detalles</button>
+                    </div>
+  </div>
+</article>
+
+<article class="product-card">
+  <div class="product-image-container">
+    <picture>
+      <source type="image/webp" srcset="https://www.unimaq.com.pe/wp-content/uploads/2020/12/tracto.jpg">
+      <source type="image/jpeg" srcset="https://www.unimaq.com.pe/wp-content/uploads/2020/12/tracto.jpg">
+      <img class="product-image" src="https://www.unimaq.com.pe/wp-content/uploads/2020/12/tracto.jpg" alt="Auto urbano compacto" loading="lazy">
+    </picture>
+    <span class="product-badge">Premium</span>
+  </div>
+  <div class="product-content">
+                    <h3 class="product-title"> TRACTO X3000 </h3>
+                    <p class="product-description"> Equipado con motores como el Cummins ISEM450-30 de 450HP o el Cummins ISM11E5 de 420 HP, ofreciendo un alto par motor para el transporte de carga pesada y la capacidad de afrontar condiciones de trabajo difíciles.  </p>
+                    <div class="product-price"> $525.000.000 </div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary">Agregar al Carrito</button>
+                        <button class="btn btn-secondary">Ver Detalles</button>
+                    </div>
+</article>
+
+<article class="product-card">
+  <div class="product-image-container">
+    <img class="product-image" 
+         src="https://previews.123rf.com/images/flyingdoctor1/flyingdoctor12208/flyingdoctor1220801168/191553096-illustration-of-an-isolated-kenworth-truck-high-quality-illustration.jpg" 
+         alt="T680" loading="lazy">
+    <span class="product-badge">Calidad</span>
+  </div>
+ <div class="product-content">
+                    <h3 class="product-title"> Kenworth T680 Next Gen </h3>
+                    <p class="product-description"> Incorpora componentes con máximo rendimiento, tecnología inteligente y una cabina de clase mundial que lo catalogan como uno de los tractocamiones más eficientes del mercado, ahorrando dinero por galón a cada kilómetro desde el primer día en carretera. </p>
+                    <div class="product-price">$510.000.000</div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary">Agregar al Carrito</button>
+                        <button class="btn btn-secondary">Ver Detalles</button>
+                    </div>
+                </div>
+</article>
+
+    </div>
+  </main>
+</body>
+</html>
